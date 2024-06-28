@@ -45,7 +45,7 @@ a {
 .menu__list {
   display: flex;
   flex-direction: row;
-  margin-top: 90px;
+  margin: 90px 10px 0 10px;
   justify-content: space-around;
 }
 
@@ -54,6 +54,7 @@ a {
   padding: 12px;
   border-radius: 4%;
   background-color: #fff7fe;
+  cursor: url(/assets/images/cursor_menu1.png), pointer;
 }
 
 .menu__link:not(:last-child) {
