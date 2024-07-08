@@ -1,0 +1,136 @@
+body {
+  background-color: #9942f1c7;
+  font-family: monospace;
+  font-size: 26px;
+}
+
+ul,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+p,
+h1 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1230px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.menu-main {
+  width: 600px;
+  height: 400px;
+  padding: 10px;
+  background-color: #ffff;
+  border-radius: 2%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: url(/assets/images/cursor_menu1.png), pointer;
+}
+
+.menu-main__title {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.menu-main__list {
+  display: flex;
+  flex-direction: row;
+  margin: 90px 10px 0 10px;
+  justify-content: space-around;
+}
+
+.menu-main__link {
+  border: 2px solid #000;
+  padding: 12px;
+  border-radius: 2%;
+  background-color: #fff7fe;
+  cursor: url(/assets/images/cursor_menu1.png), pointer;
+}
+
+.menu__link:not(:last-child) {
+  margin-right: 10px;
+}
+
+/* main page */
+
+.game-menu {
+  display: none;
+  background-color: #fff;
+  width: 600px;
+  height: 700px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 2%;
+}
+
+.game-menu-title {
+  margin: 10px 5px 44px 5px;
+  text-align: center;
+  font-size: 40px;
+}
+
+.letters__list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 10px 42px;
+  text-align: center;
+  align-items: center;
+  margin: 0 10px;
+  justify-content: center;
+}
+
+.letters__item {
+  width: 24px;
+  height: 24px;
+  border-radius: 18%;
+  border: 2px solid #000;
+  padding: 5px;
+  background-color: #fff7fe;
+  cursor: url(/assets/images/cursor_menu1.png), pointer;
+}
+
+.letters__link {
+  cursor: url(/assets/images/cursor_menu1.png), pointer;
+}
+
+.picture-wrapper {
+  border: 8px solid #9942f1c7;
+  border-radius: 2%;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  top: 78%;
+  transform: translate(-50%, -50%);
+}
+
+.canvas {
+  padding: 10px;
+}
+
+/* game page */
+
+.game-menu__title {
+  margin: 10px 5px 44px 5px;
+  text-align: center;
+  font-size: 40px;
+}
