@@ -7,6 +7,8 @@ const gameMenuWrapperTitle = document.querySelector(
   ".game-menu__wrapper-title"
 );
 const cellList = document.querySelector(".cell");
+const letters = document.querySelectorAll(".letters__link");
+
 const topicsArray = [
   { option: "Vegetables", id: 1 },
   { option: "Countries", id: 2 },
@@ -63,6 +65,8 @@ const gameVocabulary = {
   ],
 };
 
+let secretWord = null;
+
 const createGameTitle = (item) => {
   const title = document.createElement("h1");
   title.classList.add("game-menu__title");
@@ -75,15 +79,14 @@ function openGameMenu() {
   gameMenu.style.display = "block";
 }
 
-function onClickTopicsButton(e) {
+function onClickTopicsButton(event) {
   openGameMenu();
-  const title = e.target.innerHTML;
+  const title = event.target.innerHTML;
   const titleMarkup = createGameTitle(title);
   gameMenuWrapperTitle.appendChild(titleMarkup);
   //
   const titleKeyToLowerCase = gameVocabulary[title.toLowerCase()];
   const randomWord = getRandomElement(titleKeyToLowerCase);
-  console.log(randomWord);
   generateCellsFromArrayElement(randomWord);
 }
 
@@ -100,11 +103,38 @@ function getRandomElement(array) {
   return randomValueArray.toUpperCase();
 }
 
-function generateCellsFromArrayElement(arrayElement) {
-  const result = arrayElement.split("");
-  result.forEach(() => {
+function generateCellsFromArrayElement(string) {
+  const result = string.split("");
+  result.forEach((_, index) => {
     const cellItem = document.createElement("li");
     cellItem.classList.add("cell__item");
+    cellItem.setAttribute("id", index);
     cellList.appendChild(cellItem);
+    //
+    const resultWord = document.querySelector(".result");
+    //
+    secretWord = string;
+  });
+}
+
+letters.forEach((item) => {
+  item.addEventListener("click", (e) => {
+    e.preventDefault();
+    fillGameCells(e);
+    console.log(e.target.className);
+  });
+});
+
+function fillGameCells(event) {
+  const letter = event.target.innerHTML;
+
+  //
+
+  const regExp = new RegExp(`${letter}`, "g");
+  const matchesArray = secretWord.matchAll(regExp);
+
+  matchesArray.forEach((subArray) => {
+    const targetCell = document.getElementById(`${subArray.index}`);
+    targetCell.innerHTML = subArray[0];
   });
 }

@@ -98,17 +98,25 @@ a {
 }
 
 .letters__item {
-  width: 27px;
-  height: 26px;
   border-radius: 18%;
   border: 2px solid #000;
-  padding: 5px;
+  padding: 18px;
   background-color: #fff7fe;
+  position: relative;
   cursor: url(/assets/images/cursor_menu1.png), pointer;
 }
 
 .letters__link {
   cursor: url(/assets/images/cursor_menu1.png), pointer;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
 }
 
 .cell {
