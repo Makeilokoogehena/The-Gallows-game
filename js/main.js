@@ -132,3 +132,90 @@ function fillGameCells(event) {
     targetCell.innerHTML = subArray[0];
   });
 }
+
+// canvas drawing
+
+function createFirstPartDrawing() {
+  ctx.beginPath();
+  ctx.moveTo(20, 30);
+  ctx.lineTo(20, 200);
+  ctx.stroke();
+  ctx.closePath();
+}
+
+function createSecondPartDrawing() {
+  ctx.beginPath();
+  ctx.moveTo(20, 200);
+  ctx.lineTo(200, 200);
+  ctx.stroke();
+  ctx.closePath();
+}
+
+function createThirdPartDrawing() {
+  ctx.beginPath();
+  ctx.moveTo(20, 30);
+  ctx.lineTo(120, 30);
+  ctx.stroke();
+  ctx.closePath();
+}
+
+function createFourthPartDrawing() {
+  ctx.beginPath();
+  ctx.moveTo(120, 30);
+  ctx.lineTo(120, 50);
+  ctx.stroke();
+  ctx.closePath();
+}
+
+function createFifthPartDrawing() {
+  ctx.beginPath();
+  ctx.arc(120, 66, 16, 0, getRadians(360));
+  ctx.stroke();
+  ctx.closePath();
+  //
+  function getRadians(degrees) {
+    return (Math.PI / 180) * degrees;
+  }
+}
+
+function createSixthPartDrawing() {
+  ctx.beginPath();
+  ctx.moveTo(120, 82);
+  ctx.lineTo(120, 140);
+  ctx.stroke();
+  ctx.closePath();
+}
+
+function createSeventhPartDrawing() {
+  ctx.beginPath();
+  ctx.moveTo(120, 96);
+  ctx.lineTo(96, 116);
+  ctx.stroke();
+  ctx.closePath();
+}
+
+function createEighthPartDrawing() {
+  ctx.beginPath();
+  ctx.moveTo(120, 96);
+  ctx.lineTo(146, 116);
+  ctx.stroke();
+  ctx.closePath();
+}
+
+function createNinthPartDrawing() {
+  ctx.beginPath();
+  ctx.moveTo(120, 140);
+  ctx.lineTo(146, 160);
+  ctx.stroke();
+  ctx.closePath();
+}
+
+function createTenthPartDrawing() {
+  ctx.beginPath();
+  ctx.moveTo(120, 140);
+  ctx.lineTo(96, 160);
+  ctx.stroke();
+  ctx.closePath();
+}
+
+//
