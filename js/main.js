@@ -111,8 +111,6 @@ function generateCellsFromArrayElement(string) {
     cellItem.setAttribute("id", index);
     cellList.appendChild(cellItem);
     //
-    const resultWord = document.querySelector(".result");
-    //
     secretWord = string;
   });
 }
@@ -121,18 +119,14 @@ letters.forEach((item) => {
   item.addEventListener("click", (e) => {
     e.preventDefault();
     fillGameCells(e);
-    console.log(e.target.className);
   });
 });
 
 function fillGameCells(event) {
   const letter = event.target.innerHTML;
-
   //
-
   const regExp = new RegExp(`${letter}`, "g");
   const matchesArray = secretWord.matchAll(regExp);
-
   matchesArray.forEach((subArray) => {
     const targetCell = document.getElementById(`${subArray.index}`);
     targetCell.innerHTML = subArray[0];
