@@ -9,6 +9,7 @@ const gameMenuWrapperTitle = document.querySelector(
 const cellList = document.querySelector(".cell");
 const letters = document.querySelectorAll(".letters__link");
 const canvas = document.getElementById("canvas");
+const gameOverPage = document.querySelector(".game-over");
 
 const topicsArray = [
   { option: "Vegetables", id: 1 },
@@ -138,7 +139,7 @@ function fillGameCells(event) {
 
 const ctx = canvas.getContext("2d");
 
-function drawingByCoordinates(moveTo, lineTo) {
+function drawingByCoords(moveTo, lineTo) {
   const [x, y] = moveTo;
   ctx.beginPath();
   ctx.moveTo(x, y);
@@ -147,14 +148,27 @@ function drawingByCoordinates(moveTo, lineTo) {
   ctx.closePath();
 }
 
-function createFifthPartDrawing() {
+function drawingOnePartByCoords() {
+  const getRadians = (degrees) => (Math.PI / 180) * degrees;
   ctx.beginPath();
   ctx.arc(120, 66, 16, 0, getRadians(360));
   ctx.stroke();
   ctx.closePath();
-  function getRadians(degrees) {
-    return (Math.PI / 180) * degrees;
-  }
 }
 
-//
+// ctx.moveTo(20, 30); ctx.lineTo(20, 200);
+// ctx.moveTo(20, 200); ctx.lineTo(200, 200);
+// ctx.moveTo(20, 30); ctx.lineTo(120, 30);
+// ctx.moveTo(120, 30); ctx.lineTo(120, 50);
+// ctx.moveTo(120, 82); ctx.lineTo(120, 140);
+// ctx.moveTo(120, 96); ctx.lineTo(96, 116);
+// ctx.moveTo(120, 96); ctx.lineTo(146, 116);
+// ctx.moveTo(120, 140); ctx.lineTo(146, 160);
+// ctx.moveTo(120, 140); ctx.lineTo(96, 160);
+
+// game over page
+
+function gameOver() {
+  gameMenu.style.display = "none";
+  gameOverPage.style = "block";
+}
