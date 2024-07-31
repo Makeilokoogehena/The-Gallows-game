@@ -10,6 +10,9 @@ const cellList = document.querySelector(".cell");
 const letters = document.querySelectorAll(".letters__link");
 const canvas = document.getElementById("canvas");
 const gameOverPage = document.querySelector(".game-over");
+const gameOverText = document.querySelector(".game-over__text");
+const newGame = document.querySelector(".game-over__link");
+const buttonBack = document.querySelector(".back-button");
 
 const topicsArray = [
   { option: "Vegetables", id: 1 },
@@ -54,7 +57,7 @@ const gameVocabulary = {
     "Turkey",
     "Spain",
     "Germany",
-    "Switzerland",
+    "Canada",
     "Mexico",
     "Russia",
     "Ecuador",
@@ -92,11 +95,16 @@ function onClickTopicsButton(event) {
   generateCellsFromArrayElement(randomWord);
 }
 
-//
+function onClickBackMainMenu() {
+  mainMenu.style.display = "block";
+  gameMenu.style.display = "none";
+  secretWord = null;
+}
 
 vegetablesButton?.addEventListener("click", (e) => onClickTopicsButton(e));
 countriesButton?.addEventListener("click", (e) => onClickTopicsButton(e));
 fruitsButton?.addEventListener("click", (e) => onClickTopicsButton(e));
+buttonBack.addEventListener("click", onClickBackMainMenu);
 
 // game page
 
@@ -165,6 +173,8 @@ function drawingOnePartByCoords() {
 // ctx.moveTo(120, 96); ctx.lineTo(146, 116);
 // ctx.moveTo(120, 140); ctx.lineTo(146, 160);
 // ctx.moveTo(120, 140); ctx.lineTo(96, 160);
+
+//
 
 // game over page
 

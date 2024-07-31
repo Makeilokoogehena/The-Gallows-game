@@ -85,6 +85,20 @@ a {
   border-radius: 2%;
 }
 
+.back-button {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  display: inline-block;
+  max-width: 54px;
+  max-height: 54px;
+}
+
+.back-button__image {
+  width: 100%;
+  height: 100%;
+}
+
 .game-menu__title {
   margin: 20px 8px;
   text-align: center;
@@ -148,7 +162,7 @@ a {
 .picture-wrapper {
   border: 8px solid #9942f1c7;
   border-radius: 2%;
-  width: 514px;
+  width: 538px;
   display: flex;
   justify-content: center;
   position: absolute;
@@ -164,13 +178,27 @@ a {
 /* game page */
 
 .game-over {
+  background-color: #ffff;
+  width: 600px;
+  height: 500px;
+  border-radius: 2%;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
   display: none;
+}
+
+.game-over__title {
+  font-size: 48px;
 }
 
 .game-over__link {
   border: 1px solid #000;
   border-radius: 2%;
-  padding: 8px 22px;
+  padding: 8px 26px;
   background-color: #9942f1c7;
   color: #fff;
   text-align: center;
