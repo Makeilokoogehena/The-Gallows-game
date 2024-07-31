@@ -73,7 +73,15 @@ const gameVocabulary = {
 let secretWord = null;
 
 const createGameTitle = (item) => {
-  const title = document.createElement("h1");
+  let title = null;
+
+  if (document.querySelector(".game-menu__title")) {
+    title = document.querySelector(".game-menu__title");
+    title.innerHTML = `Topic: ${item}`;
+    return title;
+  }
+
+  title = document.createElement("h1");
   title.classList.add("game-menu__title");
   title.innerHTML = `Topic: ${item}`;
   return title;
@@ -86,18 +94,20 @@ function openGameMenu() {
 
 function onClickTopicsButton(event) {
   openGameMenu();
-  const title = event.target.innerHTML;
-  const titleMarkup = createGameTitle(title);
+  const text = event.target.innerHTML;
+  const titleMarkup = createGameTitle(text);
   gameMenuWrapperTitle.appendChild(titleMarkup);
   //
-  const titleKeyToLowerCase = gameVocabulary[title.toLowerCase()];
-  const randomWord = getRandomElement(titleKeyToLowerCase);
+  const key = text.toLowerCase();
+  const wordsArray = gameVocabulary[key];
+  const randomWord = getRandomElement(wordsArray);
   generateCellsFromArrayElement(randomWord);
 }
 
 function onClickBackMainMenu() {
   mainMenu.style.display = "block";
   gameMenu.style.display = "none";
+  cellList.innerHTML = "";
   secretWord = null;
 }
 
