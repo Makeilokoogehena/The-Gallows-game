@@ -142,17 +142,30 @@ letters.forEach((item) => {
   });
 });
 
+const disableLetter = (item) =>
+  (item.style.cssText += `opacity: 70%; pointer-events:none;`);
+
 function fillGameCells(event) {
   const letter = event.target.innerHTML;
-  //
+
   const regExp = new RegExp(`${letter}`, "g");
   const matchesArray = secretWord.matchAll(regExp);
+  disableLetter(event.target);
   matchesArray.forEach((subArray) => {
     const targetCell = document.getElementById(`${subArray.index}`);
     targetCell.innerHTML = subArray[0];
   });
 }
 
+// drawingByCoords([20, 200], [200, 200]);
+// drawingByCoords([20, 30], [120, 30]);
+// drawingByCoords([120, 30], [120, 50]);
+// drawingOnePartByCoords();
+// drawingByCoords([120, 82], [120, 140]);
+// drawingByCoords([120, 96], [96, 116]);
+// drawingByCoords([120, 96], [146, 116]);
+// drawingByCoords([120, 140], [146, 160]);
+// drawingByCoords([120, 140], [96, 160]);
 // canvas drawing
 
 const ctx = canvas.getContext("2d");
