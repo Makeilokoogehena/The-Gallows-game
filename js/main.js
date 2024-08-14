@@ -71,6 +71,9 @@ const gameVocabulary = {
 };
 
 let secretWord = null;
+let errorCounter = 0;
+
+//
 
 const createGameTitle = (item) => {
   let title = null;
@@ -132,6 +135,7 @@ function generateCellsFromArrayElement(string) {
     cellList.appendChild(cellItem);
     //
     secretWord = string;
+    console.log(secretWord);
   });
 }
 
@@ -139,34 +143,48 @@ letters.forEach((item) => {
   item.addEventListener("click", (e) => {
     e.preventDefault();
     fillGameCells(e);
+    errorHandler(e);
+    foo(e);
+    disableLetter(e.target);
   });
 });
+
+function foo() {
+  const cellElements = document.querySelectorAll(".cell__item");
+  const cellElementsArray = Array.from(cellElements);
+  const isFilled = cellElementsArray.every((item) => item.innerText);
+  if (isFilled) {
+    gameOver();
+  }
+}
 
 const disableLetter = (item) =>
   (item.style.cssText += `opacity: 70%; pointer-events:none;`);
 
 function fillGameCells(event) {
-  const letter = event.target.innerHTML;
+  const matchAllArray = findMatches(event);
 
-  const regExp = new RegExp(`${letter}`, "g");
-  const matchesArray = secretWord.matchAll(regExp);
-  disableLetter(event.target);
-  matchesArray.forEach((subArray) => {
+  matchAllArray.forEach((subArray) => {
     const targetCell = document.getElementById(`${subArray.index}`);
     targetCell.innerHTML = subArray[0];
   });
 }
 
-// drawingByCoords([20, 200], [200, 200]);
-// drawingByCoords([20, 30], [120, 30]);
-// drawingByCoords([120, 30], [120, 50]);
-// drawingOnePartByCoords();
-// drawingByCoords([120, 82], [120, 140]);
-// drawingByCoords([120, 96], [96, 116]);
-// drawingByCoords([120, 96], [146, 116]);
-// drawingByCoords([120, 140], [146, 160]);
-// drawingByCoords([120, 140], [96, 160]);
-// canvas drawing
+function errorHandler(event) {
+  const matches = findMatches(event);
+  if (matches.length === 0) {
+    errorCounter++;
+  }
+}
+
+function findMatches(event) {
+  const letter = event.target.innerHTML;
+  const regExp = new RegExp(`${letter}`, "g");
+  const matchAll = secretWord.matchAll(regExp);
+
+  const matchAllArray = Array.from(matchAll);
+  return matchAllArray;
+}
 
 const ctx = canvas.getContext("2d");
 
@@ -187,21 +205,20 @@ function drawingOnePartByCoords() {
   ctx.closePath();
 }
 
-// ctx.moveTo(20, 30); ctx.lineTo(20, 200);
-// ctx.moveTo(20, 200); ctx.lineTo(200, 200);
-// ctx.moveTo(20, 30); ctx.lineTo(120, 30);
-// ctx.moveTo(120, 30); ctx.lineTo(120, 50);
-// ctx.moveTo(120, 82); ctx.lineTo(120, 140);
-// ctx.moveTo(120, 96); ctx.lineTo(96, 116);
-// ctx.moveTo(120, 96); ctx.lineTo(146, 116);
-// ctx.moveTo(120, 140); ctx.lineTo(146, 160);
-// ctx.moveTo(120, 140); ctx.lineTo(96, 160);
-
-//
+// drawingByCoords([20, 30], [20, 200]);
+// drawingByCoords([20, 200], [200, 200]);
+// drawingByCoords([20, 30], [120, 30]);
+// drawingByCoords([120, 30], [120, 50]);
+// drawingOnePartByCoords();
+// drawingByCoords([120, 82], [120, 140]);
+// drawingByCoords([120, 96], [96, 116]);
+// drawingByCoords([120, 96], [146, 116]);
+// drawingByCoords([120, 140], [146, 160]);
+// drawingByCoords([120, 140], [96, 160]);
+// canvas drawing
 
 // game over page
 
 function gameOver() {
   gameMenu.style.display = "none";
-  gameOverPage.style = "block";
 }
