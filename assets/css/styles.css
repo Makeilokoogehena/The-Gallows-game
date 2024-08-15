@@ -194,12 +194,23 @@ a {
   font-size: 48px;
 }
 
+.game-over__text {
+  padding-top: 94px;
+  font-size: 30px;
+}
+
 .game-over__link {
   border: 1px solid #000;
   border-radius: 2%;
+  padding: 16px 26px;
   background-color: #9942f1c7;
   color: #fff;
+  text-transform: uppercase;
   text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  transform: translate(-50%, -30%);
 }
 
 /* // game over page */

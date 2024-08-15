@@ -10,8 +10,9 @@ const cellList = document.querySelector(".cell");
 const letters = document.querySelectorAll(".letters__link");
 const canvas = document.getElementById("canvas");
 const gameOverPage = document.querySelector(".game-over");
+const gameOverTitle = document.querySelector(".game-over__title");
 const gameOverText = document.querySelector(".game-over__text");
-const newGame = document.querySelector(".game-over__link");
+const gameOverButton = document.querySelector(".game-over__link");
 const buttonBack = document.querySelector(".back-button");
 
 const topicsArray = [
@@ -135,6 +136,7 @@ function generateCellsFromArrayElement(string) {
     cellList.appendChild(cellItem);
     //
     secretWord = string;
+    createGameOverText(secretWord);
     console.log(secretWord);
   });
 }
@@ -155,11 +157,15 @@ function foo() {
   const isFilled = cellElementsArray.every((item) => item.innerText);
   if (isFilled) {
     gameOver();
+    createGameOverTitle();
   }
 }
 
-const disableLetter = (item) =>
-  (item.style.cssText += `opacity: 70%; pointer-events:none;`);
+const disableLetter = (item) => {
+  if (!newGame) {
+    item.style.cssText += `opacity: 70%; pointer-events:none;`;
+  }
+};
 
 function fillGameCells(event) {
   const matchAllArray = findMatches(event);
@@ -220,5 +226,29 @@ function drawingOnePartByCoords() {
 // game over page
 
 function gameOver() {
-  gameMenu.style.display = "none";
+  gameMenu.style.cssText = "display:none";
+  gameOverPage.style.cssText += `display: flex; align-items: center; flex-direction: column;`;
 }
+
+function createGameOverTitle() {
+  if (foo) {
+    gameOverTitle.innerHTML = "You win!";
+    gameOverTitle.style.cssText += `text-transform: uppercase; padding-top:50px;`;
+  } else {
+    gameOverTitle.innerHTML = "You lost :(";
+  }
+}
+
+function createGameOverText(string) {
+  gameOverText.innerHTML = `The word was ${string}`;
+}
+
+function newGame(e) {
+  mainMenu.style.cssText += `display:block`;
+  gameOverPage.style.cssText += `display:none`;
+  cellList.innerHTML = "";
+  secretWord = null;
+  disableLetter();
+}
+
+gameOverButton.addEventListener("click", newGame);
