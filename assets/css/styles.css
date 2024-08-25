@@ -192,6 +192,8 @@ a {
 
 .game-over__title {
   font-size: 48px;
+  text-transform: uppercase;
+  padding-top: 50px;
 }
 
 .game-over__text {

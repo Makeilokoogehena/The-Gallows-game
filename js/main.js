@@ -113,11 +113,14 @@ function onClickBackMainMenu() {
   gameMenu.style.display = "none";
   cellList.innerHTML = "";
   secretWord = null;
+  errorCounter = 0;
+  clearCanvas();
 }
 
 vegetablesButton?.addEventListener("click", (e) => onClickTopicsButton(e));
 countriesButton?.addEventListener("click", (e) => onClickTopicsButton(e));
 fruitsButton?.addEventListener("click", (e) => onClickTopicsButton(e));
+gameOverButton.addEventListener("click", (e) => onNewGameButtonClick(e));
 buttonBack.addEventListener("click", onClickBackMainMenu);
 
 // game page
@@ -136,7 +139,6 @@ function generateCellsFromArrayElement(string) {
     cellList.appendChild(cellItem);
     //
     secretWord = string;
-    createGameOverText(secretWord);
     console.log(secretWord);
   });
 }
@@ -144,27 +146,26 @@ function generateCellsFromArrayElement(string) {
 letters.forEach((item) => {
   item.addEventListener("click", (e) => {
     e.preventDefault();
+    //
+
     fillGameCells(e);
     errorHandler(e);
-    foo(e);
+    drawingPicture(e);
+    gameOver();
+    createGameOverTextContent(secretWord);
     disableLetter(e.target);
   });
 });
 
-function foo() {
+function isCellsFilled() {
   const cellElements = document.querySelectorAll(".cell__item");
   const cellElementsArray = Array.from(cellElements);
   const isFilled = cellElementsArray.every((item) => item.innerText);
-  if (isFilled) {
-    gameOver();
-    createGameOverTitle();
-  }
+  return isFilled;
 }
 
 const disableLetter = (item) => {
-  if (!newGame) {
-    item.style.cssText += `opacity: 70%; pointer-events:none;`;
-  }
+  item.style.cssText += `opacity: 70%; pointer-events:none;`;
 };
 
 function fillGameCells(event) {
@@ -176,13 +177,6 @@ function fillGameCells(event) {
   });
 }
 
-function errorHandler(event) {
-  const matches = findMatches(event);
-  if (matches.length === 0) {
-    errorCounter++;
-  }
-}
-
 function findMatches(event) {
   const letter = event.target.innerHTML;
   const regExp = new RegExp(`${letter}`, "g");
@@ -191,6 +185,41 @@ function findMatches(event) {
   const matchAllArray = Array.from(matchAll);
   return matchAllArray;
 }
+
+function errorHandler(event) {
+  const matches = findMatches(event);
+  if (matches.length === 0) {
+    errorCounter++;
+  }
+}
+
+//
+
+function drawingPicture(e) {
+  if (errorCounter === 1) {
+    drawingByCoords([20, 30], [20, 200]);
+  } else if (errorCounter === 2) {
+    drawingByCoords([20, 200], [200, 200]);
+  } else if (errorCounter === 3) {
+    drawingByCoords([20, 30], [120, 30]);
+  } else if (errorCounter === 4) {
+    drawingByCoords([120, 30], [120, 50]);
+  } else if (errorCounter === 5) {
+    drawingOnePartByCoords();
+  } else if (errorCounter === 6) {
+    drawingByCoords([120, 82], [120, 140]);
+  } else if (errorCounter === 7) {
+    drawingByCoords([120, 96], [96, 116]);
+  } else if (errorCounter === 8) {
+    drawingByCoords([120, 96], [146, 116]);
+  } else if (errorCounter === 9) {
+    drawingByCoords([120, 140], [146, 160]);
+  } else if (errorCounter === 10) {
+    drawingByCoords([120, 140], [96, 160]);
+  }
+}
+
+// canvas drawing
 
 const ctx = canvas.getContext("2d");
 
@@ -211,31 +240,17 @@ function drawingOnePartByCoords() {
   ctx.closePath();
 }
 
-// drawingByCoords([20, 30], [20, 200]);
-// drawingByCoords([20, 200], [200, 200]);
-// drawingByCoords([20, 30], [120, 30]);
-// drawingByCoords([120, 30], [120, 50]);
-// drawingOnePartByCoords();
-// drawingByCoords([120, 82], [120, 140]);
-// drawingByCoords([120, 96], [96, 116]);
-// drawingByCoords([120, 96], [146, 116]);
-// drawingByCoords([120, 140], [146, 160]);
-// drawingByCoords([120, 140], [96, 160]);
-// canvas drawing
-
 // game over page
 
-function gameOver() {
-  gameMenu.style.cssText = "display:none";
-  gameOverPage.style.cssText += `display: flex; align-items: center; flex-direction: column;`;
-}
-
 function createGameOverTitle() {
-  if (foo) {
+  if (errorCounter === 10) {
+    const titleYouLost = (gameOverTitle.innerHTML = "You lost :(");
+    return titleYouLost;
+  }
+  const isFilled = isCellsFilled();
+  if (isFilled) {
+    console.log(isCellsFilled());
     gameOverTitle.innerHTML = "You win!";
-    gameOverTitle.style.cssText += `text-transform: uppercase; padding-top:50px;`;
-  } else {
-    gameOverTitle.innerHTML = "You lost :(";
   }
 }
 
@@ -243,12 +258,33 @@ function createGameOverText(string) {
   gameOverText.innerHTML = `The word was ${string}`;
 }
 
-function newGame(e) {
+function createGameOverTextContent(string) {
+  createGameOverTitle();
+  createGameOverText(string);
+}
+
+function gameOver() {
+  const isFilled = isCellsFilled();
+  if (isFilled || errorCounter === 10) {
+    gameMenu.style.cssText = "display:none";
+    gameOverPage.style.cssText += `display: flex; align-items: center; flex-direction: column;`;
+  }
+}
+
+function onNewGameButtonClick(e) {
   mainMenu.style.cssText += `display:block`;
   gameOverPage.style.cssText += `display:none`;
   cellList.innerHTML = "";
   secretWord = null;
-  disableLetter();
+  errorCounter = 0;
+  clearCanvas();
+  letters.forEach((item) => {
+    item.style.cssText += `opacity: 1; pointer-events:auto;`;
+  });
 }
 
-gameOverButton.addEventListener("click", newGame);
+//
+
+function clearCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
