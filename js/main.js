@@ -60,7 +60,7 @@ const gameVocabulary = {
     "Germany",
     "Canada",
     "Mexico",
-    "Russia",
+    "Romania",
     "Ecuador",
     "Aruba",
     "Hungary",
@@ -109,12 +109,8 @@ function onClickTopicsButton(event) {
 }
 
 function onClickBackMainMenu() {
-  mainMenu.style.display = "block";
   gameMenu.style.display = "none";
-  cellList.innerHTML = "";
-  secretWord = null;
-  errorCounter = 0;
-  clearCanvas();
+  resetTheGame();
 }
 
 vegetablesButton?.addEventListener("click", (e) => onClickTopicsButton(e));
@@ -139,7 +135,7 @@ function generateCellsFromArrayElement(string) {
     cellList.appendChild(cellItem);
     //
     secretWord = string;
-    console.log(secretWord);
+    // console.log(secretWord);
   });
 }
 
@@ -249,7 +245,6 @@ function createGameOverTitle() {
   }
   const isFilled = isCellsFilled();
   if (isFilled) {
-    console.log(isCellsFilled());
     gameOverTitle.innerHTML = "You win!";
   }
 }
@@ -272,8 +267,14 @@ function gameOver() {
 }
 
 function onNewGameButtonClick(e) {
-  mainMenu.style.cssText += `display:block`;
   gameOverPage.style.cssText += `display:none`;
+  resetTheGame();
+}
+
+//
+
+function resetTheGame() {
+  mainMenu.style.display = "block";
   cellList.innerHTML = "";
   secretWord = null;
   errorCounter = 0;
@@ -282,8 +283,6 @@ function onNewGameButtonClick(e) {
     item.style.cssText += `opacity: 1; pointer-events:auto;`;
   });
 }
-
-//
 
 function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
