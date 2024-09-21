@@ -1,3 +1,5 @@
+@import "./normalize.css";
+
 * {
   box-sizing: border-box;
 }
@@ -61,6 +63,7 @@ a {
 
 .menu-main__link {
   border: 2px solid #000;
+  font-family: monospace;
   padding: 12px;
   border-radius: 2%;
   background-color: #fff7fe;

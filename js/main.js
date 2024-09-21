@@ -1,3 +1,6 @@
+import "../index.html";
+import "../assets/css/styles.css";
+
 const vegetablesButton = document.querySelector(".menu-main__link_first");
 const countriesButton = document.querySelector(".menu-main__link_second");
 const fruitsButton = document.querySelector(".menu-main__link_third");
