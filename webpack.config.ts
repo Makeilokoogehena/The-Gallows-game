@@ -142,9 +142,9 @@ export default (env: Env) => {
   const config: Configuration = {
     mode: env.mode || "development",
     target: isDevMode ? "web" : "browserslist",
-    devtool: isDevMode ? "source-map" : undefined,
+    devtool: isDevMode ? "eval-source-map" : undefined,
     devServer: isDevMode ? getDevServerConfig() : undefined,
-    entry: ["@babel/polyfill", path.resolve(__dirname, "js/main.js")], // __dirname - full pathway (not include current file)
+    entry: ["@babel/polyfill", path.resolve(__dirname, "js/main.ts")], // __dirname - full pathway (not include current file)
     output: {
       path: path.resolve(__dirname, "build"),
       // filename: "[name].[contenthash].js", // [contenthash] - generate piece of name by hash
